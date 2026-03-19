@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: techstore
+
+  datasource: 
+    url: jdbc:mysql://localhost:3306/techstore
+    username: root
+    password: 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate: 
+      ddl-auto: none
+    show-sql: true
+
+server:
+  port: 9090
+
+security:
+  jwt:
+    secret-key: tTiwK4BedKF260zCArilsDN9eUonaiE0p5e9hJGNmrE= # Genera con openssl rand -base64 32
+    token-expiration: 600000 # 10 min expresado en ms
+  
