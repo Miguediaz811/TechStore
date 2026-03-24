@@ -1,0 +1,8 @@
+package com.proyecto.TechStore.dto;
+
+import lombok.Data;
+
+@Data
+public class LoginResponseDTO extends MessageResponseDTO {
+    private String jwt;
+}
