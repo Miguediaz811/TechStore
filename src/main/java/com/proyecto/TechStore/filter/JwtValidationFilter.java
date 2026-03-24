@@ -24,7 +24,7 @@ public class JwtValidationFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         // Un token legal debe existir y empezar con la palabra "Bearer " (portador)
-        if (authHeader == null  !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write("{\"error\": \"Header Authorization is missing in the request\"}");
@@ -69,8 +69,8 @@ public class JwtValidationFilter extends OncePerRequestFilter {
         // /refresh es publico porque el JwtService maneja su propia logica de tokens
         // vencidos
         return path.equals("/auth/login") 
-                path.equals("/auth/register") ||
-                path.equals("/auth/refreshToken");
+                || path.equals("/auth/register") 
+                || path.equals("/auth/refreshToken");
 
     }
 }
