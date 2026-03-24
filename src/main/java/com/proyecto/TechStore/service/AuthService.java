@@ -11,7 +11,7 @@ import com.proyecto.TechStore.dto.LoginRequestDTO;
 import com.proyecto.TechStore.dto.LoginResponseDTO;
 import com.proyecto.TechStore.dto.MessageResponseDTO;
 import com.proyecto.TechStore.dto.RefreshTokenResponseDTO;
-import com.proyecto.TechStore.dto.RegisterRequestDto;
+import com.proyecto.TechStore.dto.RegisterRequestDTO;
 import com.proyecto.TechStore.dto.UserResponseDTO;
 import com.proyecto.TechStore.entity.Users;
 import com.proyecto.TechStore.repository.UsersRepository;
@@ -27,7 +27,7 @@ public class AuthService {
 
     private final JwtService jwtService;
 
-    public MessageResponseDTO register(RegisterRequestDto request) {
+    public MessageResponseDTO register(RegisterRequestDTO request) {
         MessageResponseDTO response = new MessageResponseDTO();
         response.setMessage("Registro exitoso");
 
