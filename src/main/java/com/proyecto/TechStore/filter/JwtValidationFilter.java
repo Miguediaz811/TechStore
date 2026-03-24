@@ -69,8 +69,8 @@ public class JwtValidationFilter extends OncePerRequestFilter {
         // /refresh es publico porque el JwtService maneja su propia logica de tokens
         // vencidos
         return path.equals("/auth/login") 
-                || path.equals("/auth/register") 
-                || path.equals("/auth/refreshToken");
+                path.equals("/auth/register") ||
+                path.equals("/auth/refreshToken");
 
     }
 }
