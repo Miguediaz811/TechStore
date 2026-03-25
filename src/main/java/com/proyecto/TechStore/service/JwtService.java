@@ -109,9 +109,7 @@ public class JwtService {
                     .parseSignedClaims(token)
                     .getPayload();
         } catch (ExpiredJwtException e) {
-            // Si expiró, recuperamos los datos del cuerpo del error
-            // Esto permite que el usuario no pierda su sesión de inmediato
-            claims = e.getClaims();
+            throw new RuntimeException("Token is expired: " + e.getMessage());
         } catch (JwtException e) {
             throw new RuntimeException("Token is invalid: " + e.getMessage());
         }
