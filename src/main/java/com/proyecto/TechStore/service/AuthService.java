@@ -10,6 +10,7 @@ import com.proyecto.TechStore.dto.LoginResponseDTO;
 import com.proyecto.TechStore.dto.MessageResponseDTO;
 import com.proyecto.TechStore.dto.RefreshTokenResponseDTO;
 import com.proyecto.TechStore.dto.RegisterRequestDTO;
+import com.proyecto.TechStore.dto.UserResponseDTO;
 import com.proyecto.TechStore.entity.Users;
 import com.proyecto.TechStore.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;

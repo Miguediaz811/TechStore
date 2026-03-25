@@ -68,7 +68,7 @@ public class JwtValidationFilter extends OncePerRequestFilter {
         // Estas rutas son publicas para que el usuario pueda entrar sin ningun token
         // /refresh es publico porque el JwtService maneja su propia logica de tokens
         // vencidos
-        return path.equals("/auth/login") 
+        return path.equals("/auth/login") || 
                 path.equals("/auth/register") ||
                 path.equals("/auth/refreshToken");
 
