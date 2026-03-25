@@ -1,8 +1,6 @@
 package com.proyecto.TechStore.service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -67,20 +65,6 @@ public class AuthService {
         return response;
     }
 
-    public List<UserResponseDTO> getAllUsers() {
-        return usersRepository.findAll()
-                .stream() 
-                .map(user -> {
-                    UserResponseDTO dto = new UserResponseDTO();
-                    dto.setId(user.getId());
-                    dto.setName(user.getName());
-                    dto.setEmail(user.getEmail());
-                    dto.setRole(user.getRole());
-                    return dto;
-                })
-                .collect(Collectors.toList());
-    }
-
     /**
      * este metodo es para refrescar el token, se le pasa el token actual y se devuelve un nuevo token con una nueva fecha de expiracion
      * @param token el token actual que se quiere refrescar
@@ -89,6 +73,7 @@ public class AuthService {
     public RefreshTokenResponseDTO refreshToken(String token) {
         String jwt = jwtService.refreshToken(token);
         RefreshTokenResponseDTO response = new RefreshTokenResponseDTO();
+        response.setMessage("ok");
         response.setJwt(jwt);
         return response;
     } 

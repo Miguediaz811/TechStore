@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proyecto.TechStore.dto.MessageResponseDTO;
+import com.proyecto.TechStore.dto.PurchaseItemRequestDTO;
+import com.proyecto.TechStore.dto.PurchaseRequestDTO;
 import com.proyecto.TechStore.entity.Product;
 import com.proyecto.TechStore.entity.Purchase;
 import com.proyecto.TechStore.entity.PurchaseItem;
