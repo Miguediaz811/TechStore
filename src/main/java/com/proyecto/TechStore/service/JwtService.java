@@ -38,9 +38,10 @@ public class JwtService {
      * @param role El rol del usuario.
      * @return Un token JWT firmado con la información proporcionada.
      */
-    public String generateToken(Long id, String name, String role) {
+    public String generateToken(Long id, String name, String email, String role) {
          return Jwts.builder()
                 .claims(Map.of("userId", id)) // Agregamos datos personalizados (payload)
+                .claims(Map.of("userEmail", email))
                 .claims(Map.of("rolId", role))
                 .subject(name) // Identificamos al dueñ""o del token
                 .issuedAt(new Date()) // Fecha de creación
@@ -90,6 +91,10 @@ public class JwtService {
         return exctractClaims(token, Claims::getSubject);
     }
 
+    public String extractEmail(String token) {
+        return exctractClaims(token, claims -> claims.get("userEmail", String.class));
+    }
+
     public Long extractId(String token) {
         return exctractClaims(token, claims -> claims.get("userId", Long.class));
     }
@@ -115,6 +120,6 @@ public class JwtService {
         }
 
         // Generamos un nuevo token con los datos recuperados
-        return generateToken(claims.get("userId", Long.class), claims.getSubject(), claims.get("rolId", String.class));
+        return generateToken(claims.get("userId", Long.class), claims.getSubject(), claims.get("userEmail", String.class), claims.get("rolId", String.class));
     }
 }
