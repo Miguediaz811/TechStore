@@ -63,14 +63,18 @@ public class JwtValidationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getRequestURI();
+        String path   = request.getRequestURI();
+        String method = request.getMethod();
 
-        // Estas rutas son publicas para que el usuario pueda entrar sin ningun token
-        // /refresh es publico porque el JwtService maneja su propia logica de tokens
-        // vencidos
-        return path.equals("/auth/login") || 
-                path.equals("/auth/register") ||
-                path.equals("/auth/refreshToken");
+        if (path.equals("/auth/login") ||
+            path.equals("/auth/register") ||
+            path.equals("/auth/refreshToken")) {
+            return true;
+        } if (method.equals("GET") && path.startsWith("/products")) {
+            return true;
+        }
 
+        return false;
     }
+    
 }
