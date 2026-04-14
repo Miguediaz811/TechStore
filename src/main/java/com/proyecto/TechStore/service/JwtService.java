@@ -12,6 +12,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Servicio encargado de la gestión de JSON Web Tokens (JWT).
@@ -121,5 +122,10 @@ public class JwtService {
 
         // Generamos un nuevo token con los datos recuperados
         return generateToken(claims.get("userId", Long.class), claims.getSubject(), claims.get("userEmail", String.class), claims.get("rolId", String.class));
+    }
+
+    public boolean hasRole(HttpServletRequest request, String expectedRole) {
+        String role = (String) request.getAttribute("role");
+        return expectedRole.equals(role);
     }
 }

@@ -8,7 +8,6 @@ import com.proyecto.TechStore.dto.ProductRequestDTO;
 import com.proyecto.TechStore.entity.Product;
 import com.proyecto.TechStore.service.ProductService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -21,18 +20,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
-
 
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
-    
-    private final ProductService productService;
 
+    private final ProductService productService;
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
@@ -45,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product>getProductById(@PathVariable Long id) {
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(productService.getProductById(id));
         } catch (Exception e) {
@@ -55,9 +51,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<MessageResponseDTO>createProduct(@Valid @RequestBody ProductRequestDTO request, HttpServletRequest httpRequest) {
+    public ResponseEntity<MessageResponseDTO> createProduct(@Valid @RequestBody ProductRequestDTO request, @RequestAttribute("role") String role) {
         try {
-            String role = (String) httpRequest.getAttribute("role");
             if (!"admin".equals(role)) {
                 MessageResponseDTO error = new MessageResponseDTO();
                 error.setMessage("No tienes permisos para realizar esta acción");
@@ -73,9 +68,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MessageResponseDTO>updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequestDTO request, HttpServletRequest httpRequest) {
+    public ResponseEntity<MessageResponseDTO> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequestDTO request, @RequestAttribute("role") String role) {
         try {
-            String role = (String) httpRequest.getAttribute("role");
             if (!"admin".equals(role)) {
                 MessageResponseDTO error = new MessageResponseDTO();
                 error.setMessage("No tienes permisos para realizar esta acción");
@@ -91,9 +85,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<MessageResponseDTO> deleteProduct(@PathVariable Long id, HttpServletRequest httpRequest) {
+    public ResponseEntity<MessageResponseDTO> deleteProduct(@PathVariable Long id, @RequestAttribute("role") String role) {
         try {
-            String role = (String) httpRequest.getAttribute("role");
             if (!"admin".equals(role)) {
                 MessageResponseDTO error = new MessageResponseDTO();
                 error.setMessage("No tienes permisos para realizar esta acción");
@@ -108,5 +101,3 @@ public class ProductController {
         }
     }
 }
-    
-
